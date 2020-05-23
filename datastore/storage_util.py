@@ -100,6 +100,6 @@ class Storage:
 
 
 if __name__ == '__main__':
-    b = FileHelper(base='testingloc')
+    b = Storage(base='testingloc')
     b.set_key('testing', {'test': False})
     print(b.get_key('testing'))

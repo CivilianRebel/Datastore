@@ -1,4 +1,4 @@
-from datastore.storage_util import FileHelper
+from datastore.storage_util import Storage
 
 
 class DiskStore:
@@ -9,7 +9,7 @@ class DiskStore:
         :type loc: str
         :param loc: base folder to store data, if does not exist it will be created
         """
-        self.storage_helper = FileHelper(loc)
+        self.storage_helper = Storage(loc)
 
     def __setattr__(self, key, value):
         """
