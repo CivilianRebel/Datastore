@@ -71,7 +71,7 @@ class FileHelper:
         """
         k_file = Key(k, data_path=self.data_path)
         v = Value(key=k_file)
-        return getattr(v, k)
+        return v.json[k]
 
     @property
     def data_path(self):
