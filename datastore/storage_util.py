@@ -6,7 +6,7 @@ from datastore.key import Key
 from datastore.value import Value
 
 
-class FileHelper:
+class Storage:
 
     def __init__(self, base, *args, data_folder_name='data', **kwargs):
         """

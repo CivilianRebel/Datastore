@@ -1,4 +1,4 @@
-from datastore.file_utils import FileHelper
+from datastore.storage_util import FileHelper
 
 
 class DiskStore:
