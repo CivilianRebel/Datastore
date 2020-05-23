@@ -70,4 +70,5 @@ class DiskStore:
 
 if __name__ == '__main__':
     ds = DiskStore('wrap')
+    ds.yo = 'test'
     print(ds.yo)
