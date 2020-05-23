@@ -24,10 +24,10 @@ class Value:
         :rtype: None
         """
         with open(self.file_path, 'w') as f:
-            j.dump({self.name: self.data}, f)
+            j.dump({'data': self.data}, f)
 
     @property
-    def json(self):
+    def load(self):
         """
         Get the json object for the self.key file
         :return: json dict for key file
@@ -38,4 +38,4 @@ class Value:
         val = None
         with open(self.file_path, 'r') as f:
             val = j.load(f)
-        return val
+        return val['data']
