@@ -1,8 +1,9 @@
+import glob
 import os
 from os.path import join, exists
-import glob
-from datastore.value import Value
+
 from datastore.key import Key
+from datastore.value import Value
 
 
 class FileHelper:

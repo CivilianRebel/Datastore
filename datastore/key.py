@@ -1,4 +1,4 @@
-from os.path import exists as file_exists, isfile, join
+from os.path import exists as file_exists, join
 
 
 class Key:
