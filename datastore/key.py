@@ -1,4 +1,5 @@
 from os.path import exists as file_exists, join
+from datastore.io_util import FileUtils, key_file
 
 
 class Key:
@@ -13,15 +14,7 @@ class Key:
         """
         self.data_path = data_path
         self.name = name
-
-    @property
-    def key_file(self):
-        """
-        Get the string for the json file of '{self.name}.json}
-        :return: file path for key file
-        :rtype: str
-        """
-        return join(self.data_path, f'{self.name}.json')
+        self.key_file = key_file(self)
 
     @property
     def exists(self):
