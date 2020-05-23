@@ -9,7 +9,7 @@ class DiskStore:
         :type loc: str
         :param loc: base folder to store data, if does not exist it will be created
         """
-        self.file_helper = FileHelper(loc)
+        self.storage_helper = FileHelper(loc)
 
     def __setattr__(self, key, value):
         """
@@ -27,7 +27,7 @@ class DiskStore:
         :rtype: None
         """
         if key != 'file_helper':
-            self.file_helper.set_key(key, value)
+            self.storage_helper.set_key(key, value)
         else:
             self.__dict__[key] = value
 
@@ -43,7 +43,7 @@ class DiskStore:
         :return: value contained in key file
         :rtype: any
         """
-        return self.file_helper.get_key(item)
+        return self.storage_helper.get_key(item)
 
     def __getitem__(self, item):
         """
@@ -53,7 +53,7 @@ class DiskStore:
         :return: value in key file
         :rtype: any
         """
-        return self.file_helper.get_key(item)
+        return self.storage_helper.get_key(item)
 
     def __setitem__(self, key, value):
         """
@@ -65,7 +65,7 @@ class DiskStore:
         :return: None
         :rtype: None
         """
-        self.file_helper.set_key(key, value)
+        self.storage_helper.set_key(key, value)
 
 
 if __name__ == '__main__':
