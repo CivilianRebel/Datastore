@@ -2,13 +2,12 @@ import glob
 import os
 from os.path import join, exists
 
-from datastore.key import Key
-from datastore.value import Value
+from datastore.entry import DataEntry
 
 
 class Storage:
 
-    def __init__(self, base, *args, data_folder_name='data', **kwargs):
+    def __init__(self, config=None):
         """
         Handles most of the file checking and some medium level key, value pair methods
         Ensures base and data_folder_name directories exist
@@ -22,24 +21,17 @@ class Storage:
         :param kwargs: Extra keyword arguments, none are handled as of now
         :type kwargs: dict
         """
-        self.base = base
-        self.done_init = False
-        self.full_path = None
-        self.data_folder_name = data_folder_name
-        self.initialize(*args, **kwargs)
+        self.config = config
+        self.initialize()
 
-    def initialize(self, *args, **kwargs):
+    def initialize(self):
         """
         Create data and base folders if they do not exist
-        :param args: Not handled
-        :type args: list
-        :param kwargs: Not handled
-        :type kwargs: dict
         """
-        if not exists(self.base):
+        if not exists(self.config.base_dir):
             self.create_structure('all')
         else:
-            if not exists(self.data_path):
+            if not exists(self.config.storage_path):
                 self.create_structure('data')
 
     def create_structure(self, *args):
@@ -51,10 +43,10 @@ class Storage:
         :type args: list
         """
         if 'all' in args:
-            os.mkdir(self.base)
-            os.mkdir(self.data_path)
+            os.mkdir(self.config.base_dir)
+            os.mkdir(self.config.storage_path)
         elif 'data' in args:
-            os.mkdir(self.data_path)
+            os.mkdir(self.config.storage_path)
 
     def set_key(self, k, v):
         """
@@ -64,14 +56,8 @@ class Storage:
         :param v: Value to write to key
         :type v: any
         """
-
-        """
-        entry = Entry(self.config.data_path)
+        entry = DataEntry(self.config)
         entry.write(k, v)
-        """
-        k_file = Key(k, data_path=self.data_path)
-        value = Value(k_file, v)
-        value.update()
 
     def get_key(self, k):
         """
@@ -81,33 +67,8 @@ class Storage:
         :return: Value stored, throws KeyError if none exist
         :rtype: any
         """
-
-        """
-        entry = Entry(self.config.data_path, name=k)
+        entry = Entry(self.config, key=k)
         return entry.value
-        """
-
-        k_file = Key(k, data_path=self.data_path)
-        v = Value(key=k_file)
-        return v.load
-
-    @property
-    def data_path(self):
-        """
-        Returns string for the path to store json files in
-        :return:
-        :rtype:
-        """
-        return join(self.base, self.data_folder_name)
-
-    @property
-    def glob_all(self):
-        """
-        Grabs list of all json files in data path
-        :return: List of json file paths for all key entries stored on disk
-        :rtype: list
-        """
-        return glob.glob(join(self.data_path, '*.json'))
 
 
 if __name__ == '__main__':
