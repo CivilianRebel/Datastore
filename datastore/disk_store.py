@@ -1,4 +1,5 @@
 from datastore.storage_util import Storage
+from datastore.settings import Settings
 
 
 class DiskStore:
@@ -9,7 +10,7 @@ class DiskStore:
         :type loc: str
         :param loc: base folder to store data, if does not exist it will be created
         """
-        self.storage_helper = Storage(loc)
+        self.__dict__['storage_helper'] = Storage(loc, Settings())
 
     def __setattr__(self, key, value):
         """
@@ -26,10 +27,8 @@ class DiskStore:
         :return: none
         :rtype: None
         """
-        if key != 'file_helper':
-            self.storage_helper.set_key(key, value)
-        else:
-            self.__dict__[key] = value
+        self.storage_helper.set_key(key, value)
+
 
     def __getattr__(self, item):
         """
