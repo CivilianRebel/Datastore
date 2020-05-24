@@ -64,6 +64,11 @@ class Storage:
         :param v: Value to write to key
         :type v: any
         """
+
+        """
+        entry = Entry(self.config.data_path)
+        entry.write(k, v)
+        """
         k_file = Key(k, data_path=self.data_path)
         value = Value(k_file, v)
         value.update()
@@ -76,6 +81,12 @@ class Storage:
         :return: Value stored, throws KeyError if none exist
         :rtype: any
         """
+
+        """
+        entry = Entry(self.config.data_path, name=k)
+        return entry.value
+        """
+
         k_file = Key(k, data_path=self.data_path)
         v = Value(key=k_file)
         return v.load
