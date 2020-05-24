@@ -56,8 +56,8 @@ class Storage:
         :param v: Value to write to key
         :type v: any
         """
-        entry = DataEntry(self.config)
-        entry.write(k, v)
+        entry = DataEntry(config=self.config, key=k)
+        entry.write(v)
 
     def get_key(self, k):
         """

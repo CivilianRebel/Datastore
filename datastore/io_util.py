@@ -1,15 +1,13 @@
 import os
+import json
 from os.path import join, exists
 
-from datastore.key import Key
+
+def read(path):
+    with open(path, 'r') as f:
+        return json.load(f)['data']
 
 
-def key_file(k_o):
-    return join(k_o.data_path, f'{k_o.name}.json')
-
-
-class FileUtils:
-
-    def __init__(self, key_obj):
-        pass
-
+def write(path, val):
+    with open(path, 'w') as f:
+        json.dump({'data': val}, f)
