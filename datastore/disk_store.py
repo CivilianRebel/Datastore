@@ -4,13 +4,13 @@ from datastore.settings import Settings
 
 class DiskStore:
 
-    def __init__(self, loc):
+    def __init__(self):
         """
         Handles higher level reading and writing (key, value) pairs to files on disk
         :type loc: str
         :param loc: base folder to store data, if does not exist it will be created
         """
-        self.__dict__['storage_helper'] = Storage(loc, Settings())
+        self.__dict__['storage_helper'] = Storage(Settings())
 
     def __setattr__(self, key, value):
         """
@@ -68,6 +68,6 @@ class DiskStore:
 
 
 if __name__ == '__main__':
-    ds = DiskStore('wrap')
+    ds = DiskStore()
     ds.yo = 'test'
     print(ds.yo)

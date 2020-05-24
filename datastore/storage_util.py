@@ -3,6 +3,7 @@ import os
 from os.path import join, exists
 
 from datastore.entry import DataEntry
+from datastore.settings import Settings
 
 
 class Storage:
@@ -72,6 +73,6 @@ class Storage:
 
 
 if __name__ == '__main__':
-    b = Storage(base='testingloc')
-    b.set_key('testing', {'test': False})
-    print(b.get_key('testing'))
+    b = Storage(config=Settings())
+    b.set_key('test_set', 'lets see')
+    print(b.get_key('test_set'))
