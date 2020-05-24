@@ -67,7 +67,7 @@ class Storage:
         :return: Value stored, throws KeyError if none exist
         :rtype: any
         """
-        entry = Entry(self.config, key=k)
+        entry = DataEntry(self.config, key=k)
         return entry.value
 
 
