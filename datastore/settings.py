@@ -3,8 +3,8 @@ from os.path import exists, join
 import json
 
 defaults = {'base_dir': 'datastore',
-            'data_dir': 'data'}
-defaults['storage_path'] = join(defaults['base_dir'], defaults['data_dir'])
+            'data_dir': 'data',
+            'storage_path': None}
 
 
 class Settings:
@@ -20,9 +20,11 @@ class Settings:
         for k, v in kwargs.items():
             if k in self.options.keys():
                 self.options[k] = v
+
         self.save()
 
     def save(self):
+        self.options['storage_path'] = join(self.base_dir, self.data_dir)
         with open(self.config_file, 'w') as f:
             json.dump(self.options, f)
 
